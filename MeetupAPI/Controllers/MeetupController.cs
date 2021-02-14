@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MeetupAPI.Contexts;
+using MeetupAPI.Entities;
 using MeetupAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,19 @@ namespace MeetupAPI.Controllers
             var meetupDto = _mapper.Map<MeetupDetailsDto>(meetup);            
 
             return Ok(meetupDto);
+        }
+
+        [HttpPost]
+        public ActionResult Post([FromBody]MeetupDto model)
+        {
+            var meetup = _mapper.Map<Meetup>(model);
+
+            _meetupContext.Meetups.Add(meetup);
+            _meetupContext.SaveChanges();
+
+            var key = meetup.Name.Replace(" ", "-").ToLower();
+
+            return Created("api/meetup/" + key, null);
         }
     }
 }

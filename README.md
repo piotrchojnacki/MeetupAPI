@@ -13,7 +13,6 @@ PM> update-database -v
 ## Postman
 ```sh
 GET https://localhost:44344/api/meetup
-GET https://localhost:44344/api/meetup/4devs
 ```
 
 After commit __[*][pc] Add controller for meetups__:
@@ -21,3 +20,18 @@ After commit __[*][pc] Add controller for meetups__:
 PM> Install-Package AutoMapper.Extensions.Microsoft.DependencyInjection
 ```
 
+After commit __[*][pc] GET method for single meetup__:
+```sh
+GET https://localhost:44344/api/meetup/4devs
+GET https://localhost:44344/api/meetup/web-summit
+GET https://localhost:44344/api/meetup/test
+```
+
+POST https://localhost:44344/api/meetup/
+Raw - Json:
+{
+    "name": "JsEvent",
+    "organizer": "chrome",
+    "date": "2020-03-03T15:30:00",
+    "isPrivate": false
+}
