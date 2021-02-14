@@ -15,7 +15,7 @@ namespace MeetupAPI.Seeders
         {
             _meetupContext = meetupContext;
         }
-
+        
         public void Seed()
         {
             if (_meetupContext.Database.CanConnect())

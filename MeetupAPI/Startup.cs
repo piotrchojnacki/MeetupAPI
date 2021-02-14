@@ -28,6 +28,8 @@ namespace MeetupAPI
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllers();
+
             services.AddDbContext<MeetupContext>();
             services.AddScoped<MeetupSeeder>();
         }
@@ -46,6 +48,11 @@ namespace MeetupAPI
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
 
             meetupSeeder.Seed();
         }
