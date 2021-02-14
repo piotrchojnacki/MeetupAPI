@@ -32,6 +32,7 @@ namespace MeetupAPI
 
             services.AddDbContext<MeetupContext>();
             services.AddScoped<MeetupSeeder>();
+            services.AddAutoMapper(this.GetType().Assembly);
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, MeetupSeeder meetupSeeder)

@@ -1,6 +1,8 @@
-﻿using MeetupAPI.Contexts;
-using MeetupAPI.Entities;
+﻿using AutoMapper;
+using MeetupAPI.Contexts;
+using MeetupAPI.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -10,18 +12,21 @@ namespace MeetupAPI.Controllers
     public class MeetupController : ControllerBase
     {
         private readonly MeetupContext _meetupContext;
+        private readonly IMapper _mapper;
 
-        public MeetupController(MeetupContext meetupContext)
+        public MeetupController(MeetupContext meetupContext, IMapper mapper)
         {
             _meetupContext = meetupContext;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public ActionResult<List<Meetup>> Get()
+        public ActionResult<List<MeetupDetailsDto>> Get()
         {
-            var meetups = _meetupContext.Meetups.ToList();
+            var meetups = _meetupContext.Meetups.Include(m => m.Location).ToList();
+            var meetupDtos = _mapper.Map<List<MeetupDetailsDto>>(meetups);
 
-            return Ok(meetups);
+            return Ok(meetupDtos);
         }
     }
 }
