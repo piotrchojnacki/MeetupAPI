@@ -27,6 +27,10 @@ GET https://localhost:44344/api/meetup/web-summit
 GET https://localhost:44344/api/meetup/test
 ```
 
+
+After commit __[*][pc] Add POST method for Meetup__
+
+```sh
 POST https://localhost:44344/api/meetup/
 Raw - Json:
 {
@@ -35,3 +39,27 @@ Raw - Json:
     "date": "2020-03-03T15:30:00",
     "isPrivate": false
 }
+```
+
+After commit __[*][pc] __
+
+```sh
+Request:
+
+POST https://localhost:44344/api/meetup/
+Raw - Json:
+{
+}
+
+Response:
+
+{
+    "Name": [
+        "The Name field is required."
+    ],
+    "Organizer": [
+        "The Organizer field is required."
+    ]
+}
+```
+
