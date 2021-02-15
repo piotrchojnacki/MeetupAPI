@@ -41,7 +41,7 @@ Raw - Json:
 }
 ```
 
-After commit __[*][pc] __
+After commit __[*][pc] Simple validation atributes__
 
 ```sh
 Request:
@@ -61,5 +61,14 @@ Response:
         "The Organizer field is required."
     ]
 }
+```
+
+After commit __[*][pc] Add PUT method for meetup__
+```sh
+PUT https://localhost:44344/api/meetup/test
+
+
+404 Not Found
+
 ```
 

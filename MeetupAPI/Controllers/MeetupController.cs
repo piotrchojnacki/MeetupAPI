@@ -38,7 +38,7 @@ namespace MeetupAPI.Controllers
         {
             var meetup = _meetupContext.Meetups
                 .Include(m => m.Location)
-                .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == name.Replace(" ", "-").ToLower());
+                .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == name.ToLower());
 
             if(meetup == null)
             {
@@ -66,6 +66,33 @@ namespace MeetupAPI.Controllers
             var key = meetup.Name.Replace(" ", "-").ToLower();
 
             return Created("api/meetup/" + key, null);
+        }
+
+        [HttpPut("{name}")]
+        public ActionResult Put(string name, [FromBody] MeetupDto model)
+        {
+            var meetup = _meetupContext.Meetups
+                .Include(m => m.Location)
+                .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == name.ToLower());
+
+            if(meetup == null)
+            {
+                return NotFound();
+            }
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            meetup.Name = model.Name;
+            meetup.Organizer = model.Organizer;
+            meetup.Date = model.Date;
+            meetup.IsPrivate = meetup.IsPrivate;
+
+            _meetupContext.SaveChanges();
+
+            return NoContent();
         }
     }
 }
