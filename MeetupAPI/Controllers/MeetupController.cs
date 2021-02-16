@@ -40,18 +40,18 @@ namespace MeetupAPI.Controllers
                 .Include(m => m.Location)
                 .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == name.ToLower());
 
-            if(meetup == null)
+            if (meetup == null)
             {
                 return NotFound();
             }
 
-            var meetupDto = _mapper.Map<MeetupDetailsDto>(meetup);            
+            var meetupDto = _mapper.Map<MeetupDetailsDto>(meetup);
 
             return Ok(meetupDto);
         }
 
         [HttpPost]
-        public ActionResult Post([FromBody]MeetupDto model)
+        public ActionResult Post([FromBody] MeetupDto model)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace MeetupAPI.Controllers
                 .Include(m => m.Location)
                 .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == name.ToLower());
 
-            if(meetup == null)
+            if (meetup == null)
             {
                 return NotFound();
             }
@@ -90,6 +90,24 @@ namespace MeetupAPI.Controllers
             meetup.Date = model.Date;
             meetup.IsPrivate = meetup.IsPrivate;
 
+            _meetupContext.SaveChanges();
+
+            return NoContent();
+        }
+
+        [HttpDelete("{name}")]
+        public ActionResult Delete(string name)
+        {
+            var meetup = _meetupContext.Meetups
+                .Include(m => m.Location)
+                .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == name.ToLower());
+
+            if (meetup == null)
+            {
+                return NotFound();
+            }
+
+            _meetupContext.Remove(meetup);
             _meetupContext.SaveChanges();
 
             return NoContent();

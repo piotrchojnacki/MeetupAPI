@@ -72,3 +72,7 @@ PUT https://localhost:44344/api/meetup/test
 
 ```
 
+After commit __[*][pc] Add DELETE method for meetup__
+```sh
+DELETE https://localhost:44344/api/meetup/DotNetos
+```
