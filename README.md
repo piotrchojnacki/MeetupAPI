@@ -76,3 +76,25 @@ After commit __[*][pc] Add DELETE method for meetup__
 ```sh
 DELETE https://localhost:44344/api/meetup/DotNetos
 ```
+
+After commit __[*][pc] Add POST method for lecture__
+```sh
+POST https://localhost:44344/api/meetup/test/lecture
+{
+    "author": "Piotr Chojnacki",
+    "topic": ".NET Core",
+    "description": "Test"
+}
+
+404 Not Found
+
+
+POST https://localhost:44344/api/meetup/4dev/lecture
+{
+    "author": "Piotr Chojnacki",
+    "topic": ".NET Core",
+    "description": "Test"
+}
+
+201 Created
+```
