@@ -98,3 +98,9 @@ POST https://localhost:44344/api/meetup/4dev/lecture
 
 201 Created
 ```
+
+[*][pc] GET method for list of lectures in meetup
+```sh
+https://localhost:44344/api/meetup/4dev
+https://localhost:44344/api/meetup/4dev/lecture
+```

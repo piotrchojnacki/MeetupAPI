@@ -38,6 +38,7 @@ namespace MeetupAPI.Controllers
         {
             var meetup = _meetupContext.Meetups
                 .Include(m => m.Location)
+                .Include(m => m.Lectures)
                 .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == name.ToLower());
 
             if (meetup == null)

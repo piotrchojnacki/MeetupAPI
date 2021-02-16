@@ -4,6 +4,7 @@ using MeetupAPI.Entities;
 using MeetupAPI.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MeetupAPI.Controllers
@@ -18,6 +19,23 @@ namespace MeetupAPI.Controllers
         {
             _meetupContext = meetupContext;
             _mapper = mapper;
+        }
+
+        [HttpGet]
+        public ActionResult Get(string meetupName)
+        {
+            var meetup = _meetupContext.Meetups
+                .Include(m => m.Lectures)
+                .FirstOrDefault(m => m.Name.Replace(" ", "-").ToLower() == meetupName.ToLower());
+
+            if (meetup == null)
+            {
+                return NotFound();
+            }
+
+            var lectures = _mapper.Map<List<LectureDto>>(meetup.Lectures);
+
+            return Ok(lectures);
         }
 
         public ActionResult Post(string meetupName, [FromBody] LectureDto model)
