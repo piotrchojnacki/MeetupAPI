@@ -99,8 +99,14 @@ POST https://localhost:44344/api/meetup/4dev/lecture
 201 Created
 ```
 
-[*][pc] GET method for list of lectures in meetup
+After commit __[*][pc] GET method for list of lectures in meetup__
 ```sh
-https://localhost:44344/api/meetup/4dev
-https://localhost:44344/api/meetup/4dev/lecture
+GET https://localhost:44344/api/meetup/4dev
+GET https://localhost:44344/api/meetup/4dev/lecture
+```
+
+After commit __[*][pc] DELETE method for list of lectures in meetup__
+```sh
+DELETE https://localhost:44344/api/meetup/dotnetos/lecture/1010
+DELETE https://localhost:44344/api/meetup/dotnetos/lecture
 ```
